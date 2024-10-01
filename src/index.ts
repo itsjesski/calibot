@@ -2,6 +2,7 @@ import { Client, GatewayIntentBits } from 'discord.js';
 import * as dotenv from 'dotenv';
 import { interactionManager } from './interactions/interactionManager';
 import { registerCommands } from './commands/registerCommands';
+import './healthCheck'; // Import the health check server
 
 dotenv.config();
 
