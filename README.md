@@ -1,2 +1,1 @@
-# calibot
-VRChat Dancer Slot Bot
+# VREventManager

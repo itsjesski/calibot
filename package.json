@@ -1,0 +1,19 @@
+{
+  "name": "discord-event-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "register-commands": "ts-node src/commands/registerCommands.ts",
+    "start": "ts-node src/index.ts",
+    "dev": "npm run register-commands && npm run start"
+  },
+  "dependencies": {
+    "discord.js": "^14.16.3",
+    "dotenv": "^10.0.0",
+    "ts-node": "^10.9.2"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.2"
+  }
+}
