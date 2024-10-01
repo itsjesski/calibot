@@ -6,7 +6,9 @@
   "scripts": {
     "register-commands": "ts-node src/commands/registerCommands.ts",
     "start": "ts-node src/index.ts",
-    "digitalocean": "npm run start"
+    "digitalocean": "npm run start",
+    "prettier": "prettier --write \"src/**/*.ts\"",
+    "prettier:check": "prettier --check \"src/**/*.ts\""
   },
   "dependencies": {
     "concurrently": "^9.0.1",
@@ -15,5 +17,24 @@
     "express": "^4.21.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.6.2"
+  },
+  "devDependencies": {
+    "prettier": "^3.3.3",
+    "husky": "^8.0.0",
+    "lint-staged": "^13.0.0"
+  },
+  "prettier": {
+    "printWidth": 80,
+    "tabWidth": 2,
+    "useTabs": false,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "all",
+    "bracketSpacing": true,
+    "jsxBracketSameLine": false,
+    "arrowParens": "always"
+  },
+  "lint-staged": {
+    "src/**/*.ts": ["prettier --write", "git add"]
   }
 }

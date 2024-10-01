@@ -6,7 +6,9 @@ import './healthCheck'; // Import the health check server
 
 dotenv.config();
 
-const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages] });
+const client = new Client({
+  intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages],
+});
 
 client.once('ready', () => {
   console.log('Calibot is online!');
@@ -17,8 +19,10 @@ client.on('interactionCreate', async (interaction) => {
 });
 
 // Register commands before logging in the bot
-registerCommands().then(() => {
-  client.login(process.env.DISCORD_TOKEN);
-}).catch(error => {
-  console.error('Failed to register commands:', error);
-});
+registerCommands()
+  .then(() => {
+    client.login(process.env.DISCORD_TOKEN);
+  })
+  .catch((error) => {
+    console.error('Failed to register commands:', error);
+  });

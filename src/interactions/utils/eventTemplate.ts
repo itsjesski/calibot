@@ -1,5 +1,13 @@
-export function getEventTemplate(eventTitle: string, startTimeUnix: string, slots: number, peoplePerSlot: number, duration: number, description: string, slotList: string) {
-    const template = `
+export function getEventTemplate(
+  eventTitle: string,
+  startTimeUnix: string,
+  slots: number,
+  peoplePerSlot: number,
+  duration: number,
+  description: string,
+  slotList: string,
+) {
+  const template = `
     **::OPERATION:: ${eventTitle}**
 ${description ? `\n${description}\n` : ''}
 
@@ -11,6 +19,6 @@ ${description ? `\n${description}\n` : ''}
 **Slot Times:**
 ${slotList}
   `.trim();
-  
-    return template;
-  }
+
+  return template;
+}

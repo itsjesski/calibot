@@ -6,19 +6,15 @@ import { createEventCommand } from './createEventCommand';
 
 dotenv.config();
 
-const commands = [
-  createEventCommand
-]
-  .map(command => command.toJSON());
+const commands = [createEventCommand].map((command) => command.toJSON());
 
 const rest = new REST({ version: '10' }).setToken(process.env.DISCORD_TOKEN!);
 
 export async function registerCommands() {
   try {
-    await rest.put(
-      Routes.applicationCommands(process.env.DISCORD_APP_ID!),
-      { body: commands }
-    );
+    await rest.put(Routes.applicationCommands(process.env.DISCORD_APP_ID!), {
+      body: commands,
+    });
 
     console.log('Successfully reloaded application (/) commands.');
   } catch (error) {

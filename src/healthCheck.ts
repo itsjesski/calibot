@@ -2,7 +2,10 @@ import http from 'http';
 
 const port = process.env.PORT || 3000;
 
-const requestListener = (req: http.IncomingMessage, res: http.ServerResponse) => {
+const requestListener = (
+  req: http.IncomingMessage,
+  res: http.ServerResponse,
+) => {
   if (req.url === '/health' && req.method === 'GET') {
     res.writeHead(200, { 'Content-Type': 'text/plain' });
     res.end('OK');

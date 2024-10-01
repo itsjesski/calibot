@@ -1,14 +1,25 @@
 import { GuildMemberRoleManager, Interaction } from 'discord.js';
 import config from '../config.json';
-import { handleCreateEvent, handleCreateEventModalSubmit } from './events/createEvent';
+import {
+  handleCreateEvent,
+  handleCreateEventModalSubmit,
+} from './events/createEvent';
 import { handleEditButtonInteraction } from './events/editEvent';
-import { handleRemoveButtonInteraction, handleSlotRemovalInteraction } from './events/removeEvent';
-import { handleSignUpButtonInteraction, handleSlotSelectionInteraction } from './events/signupEvent';
-
+import {
+  handleRemoveButtonInteraction,
+  handleSlotRemovalInteraction,
+} from './events/removeEvent';
+import {
+  handleSignUpButtonInteraction,
+  handleSlotSelectionInteraction,
+} from './events/signupEvent';
 
 function userIsManager(interaction: Interaction) {
   const memberRoles = interaction.member?.roles;
-  if (memberRoles instanceof GuildMemberRoleManager && memberRoles.cache.has(config.managerRoleId)) {
+  if (
+    memberRoles instanceof GuildMemberRoleManager &&
+    memberRoles.cache.has(config.managerRoleId)
+  ) {
     return true;
   }
   return false;
@@ -18,7 +29,7 @@ async function managerFunctions(interaction: Interaction) {
   try {
     // Commands
     if (interaction.isCommand()) {
-      if(interaction.commandName === 'event') {
+      if (interaction.commandName === 'event') {
         await handleCreateEvent(interaction);
         return;
       }
@@ -40,13 +51,16 @@ async function managerFunctions(interaction: Interaction) {
   } catch (error) {
     console.error('Error handling manager interaction:', error);
     if (interaction.isRepliable()) {
-      await interaction.reply({ content: 'There was an error while handling this interaction.', ephemeral: true });
+      await interaction.reply({
+        content: 'There was an error while handling this interaction.',
+        ephemeral: true,
+      });
     }
   }
 }
 
 async function everyoneFunctions(interaction: Interaction) {
-  try{
+  try {
     // Buttons
     if (interaction.isButton()) {
       if (interaction.customId === 'signUp') {
@@ -59,18 +73,20 @@ async function everyoneFunctions(interaction: Interaction) {
         await handleSlotRemovalInteraction(interaction);
       }
     }
-  }
-  catch (error) {
+  } catch (error) {
     console.error('Error handling everyone interaction:', error);
     if (interaction.isRepliable()) {
-      await interaction.reply({ content: 'There was an error while handling this interaction.', ephemeral: true });
+      await interaction.reply({
+        content: 'There was an error while handling this interaction.',
+        ephemeral: true,
+      });
     }
   }
 }
 
 export const interactionManager = async (interaction: Interaction) => {
   // Check to see if we should load manager items.
-  if(userIsManager(interaction)) {
+  if (userIsManager(interaction)) {
     await managerFunctions(interaction);
     await everyoneFunctions(interaction);
     return;
