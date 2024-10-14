@@ -17,6 +17,7 @@ ${description ? `\n${description}\n` : ''}
 - Each slot lasts ${duration} minutes.
 
 **Slot Times:**
+${"``DJ``"}
 ${slotList}
 `.trim();
 
