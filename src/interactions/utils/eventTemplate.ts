@@ -18,8 +18,6 @@ ${description ? `\n${description}\n` : ''}
 
 **Slot Times:**
 ${slotList}
-  
-<@&1188126907670208522>
 `.trim();
 
   return template;
