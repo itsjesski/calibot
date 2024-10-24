@@ -12,7 +12,6 @@ import {
   CommandInteraction,
 } from 'discord.js';
 import * as dotenv from 'dotenv';
-import config from '../../config.json';
 import { getEventTemplate } from '../utils/eventTemplate';
 
 dotenv.config();
