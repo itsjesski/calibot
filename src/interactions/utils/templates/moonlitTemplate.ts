@@ -1,7 +1,7 @@
 export function getMoonlitTemplate(
     startTimeUnix: string,
     dj: string,
-    leader: string,
+    leader: string | null,
     slotList: string,
   ) {
     const template = `**LAYER.// Moonlit EU/NA**

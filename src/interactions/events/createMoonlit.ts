@@ -22,7 +22,7 @@ import {
     const slots = 4;
     const duration = 15;
     const dj = options.getString('dj', true);
-    const leader = options.getString('leader', true);
+    const leader = options.getString('leader', false);
   
     // Generate slot timestamps
     const slotTimestamps = [];
