@@ -1,31 +1,26 @@
 import * as dotenv from 'dotenv';
-import { GuildMemberRoleManager, Interaction } from 'discord.js';
+import { Interaction } from 'discord.js';
 import {
-  handleCreateEvent,
-  handleCreateEventModalSubmit,
+  handleCreateEvent
 } from './events/createEvent';
-import { handleEditButtonInteraction } from './events/editEvent';
+import { handleCreateEventModalSubmit } from './utils/eventsCommon';
+import { handleEditButtonInteraction } from './utils/editEvent';
 import {
   handleRemoveButtonInteraction,
   handleSlotRemovalInteraction,
-} from './events/removeEvent';
+} from './utils/removeEvent';
 import {
   handleSignUpButtonInteraction,
   handleSlotSelectionInteraction,
-} from './events/signupEvent';
+} from './utils/signupEvent';
+import {
+  handleMoonlitEvent
+} from './events/createMoonlit';
+import{
+  userIsManager
+} from './utils/roleManagement';
 
 dotenv.config();
-
-function userIsManager(interaction: Interaction) {
-  const memberRoles = interaction.member?.roles;
-  if (
-    memberRoles instanceof GuildMemberRoleManager &&
-    memberRoles.cache.has(process.env.MANAGER_ROLE_ID as string)
-  ) {
-    return true;
-  }
-  return false;
-}
 
 async function managerFunctions(interaction: Interaction) {
   try {
@@ -33,6 +28,9 @@ async function managerFunctions(interaction: Interaction) {
     if (interaction.isCommand()) {
       if (interaction.commandName === 'event') {
         await handleCreateEvent(interaction);
+        return;
+      } else if (interaction.commandName === 'moonlit') {
+        await handleMoonlitEvent(interaction);
         return;
       }
     }
