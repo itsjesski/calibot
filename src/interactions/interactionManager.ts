@@ -1,6 +1,5 @@
 import * as dotenv from 'dotenv';
 import { GuildMemberRoleManager, Interaction } from 'discord.js';
-import config from '../config.json';
 import {
   handleCreateEvent,
   handleCreateEventModalSubmit,
