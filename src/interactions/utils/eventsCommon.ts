@@ -1,4 +1,5 @@
-import { Interaction, ButtonBuilder, ButtonStyle, GuildMemberRoleManager, ActionRowBuilder } from "discord.js";
+import { Interaction, ButtonBuilder, ButtonStyle, ActionRowBuilder } from "discord.js";
+import { userIsManager } from "./roleManagement";
 
 export const handleCreateEventModalSubmit = async (
     interaction: Interaction,
@@ -21,11 +22,7 @@ export const handleCreateEventModalSubmit = async (
     const buttons = [signUpButton, removeButton];
   
     // Check if the user has the required role to see the edit button
-    const memberRoles = interaction.member?.roles;
-    if (
-      memberRoles instanceof GuildMemberRoleManager &&
-      memberRoles.cache.has(process.env.MANAGER_ROLE_ID as string)
-    ) {
+    if (userIsManager(interaction)) {
       const editButton = new ButtonBuilder()
         .setCustomId('edit')
         .setLabel('Edit')

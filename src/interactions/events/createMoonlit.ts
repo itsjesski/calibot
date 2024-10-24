@@ -1,14 +1,10 @@
 import * as dotenv from 'dotenv';
 import {
-    Interaction,
     CommandInteractionOptionResolver,
     ModalBuilder,
     TextInputBuilder,
     TextInputStyle,
     ActionRowBuilder,
-    ButtonBuilder,
-    ButtonStyle,
-    GuildMemberRoleManager,
     CacheType,
     CommandInteraction,
   } from 'discord.js';
