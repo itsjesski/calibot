@@ -11,8 +11,11 @@ import {
   CacheType,
   CommandInteraction,
 } from 'discord.js';
+import * as dotenv from 'dotenv';
 import config from '../../config.json';
 import { getEventTemplate } from '../utils/eventTemplate';
+
+dotenv.config();
 
 export const handleCreateEvent = async (
   interaction: CommandInteraction<CacheType>,
@@ -93,7 +96,7 @@ export const handleCreateEventModalSubmit = async (
   const memberRoles = interaction.member?.roles;
   if (
     memberRoles instanceof GuildMemberRoleManager &&
-    memberRoles.cache.has(config.managerRoleId)
+    memberRoles.cache.has(process.env.MANAGER_ROLE_ID as string)
   ) {
     const editButton = new ButtonBuilder()
       .setCustomId('edit')
