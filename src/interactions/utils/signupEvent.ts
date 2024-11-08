@@ -2,8 +2,9 @@ import {
   Interaction,
   ActionRowBuilder,
   ButtonBuilder,
-  ButtonStyle,
+  ButtonStyle
 } from 'discord.js';
+import { chunkArray } from './generalUtilities';
 
 export const handleSignUpButtonInteraction = async (
   interaction: Interaction,
@@ -52,11 +53,19 @@ export const handleSignUpButtonInteraction = async (
   }
 
   if (rows.length > 0) {
+    const chunkedRows = chunkArray(rows, 5);
+
     await interaction.reply({
-      content: 'Select a slot to sign up:',
-      components: rows,
+      components: chunkedRows[0],
       ephemeral: true,
     });
+
+    for (let i = 1; i < chunkedRows.length; i++) {
+      await interaction.followUp({
+        components: chunkedRows[i],
+        ephemeral: true,
+      });
+    }
   } else {
     await interaction.reply({
       content: 'All slots are full.',
